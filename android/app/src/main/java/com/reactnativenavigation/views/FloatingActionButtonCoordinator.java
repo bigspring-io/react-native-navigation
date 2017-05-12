@@ -154,9 +154,13 @@ class FloatingActionButtonCoordinator {
     private CoordinatorLayout.LayoutParams createFabLayoutParams() {
         final CoordinatorLayout.LayoutParams lp = new CoordinatorLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
         lp.gravity = Gravity.RIGHT | Gravity.BOTTOM;
-        lp.bottomMargin = margin;
         lp.rightMargin = margin;
         lp.topMargin = margin;
+        if (params.bottomMargin != null) {
+            lp.bottomMargin = (int) ViewUtils.convertDpToPixel(params.bottomMargin);
+        } else {
+            lp.bottomMargin = margin;
+        }
         return lp;
     }
 

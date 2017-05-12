@@ -11,6 +11,7 @@ public class FabParams {
     public String collapsedId;
     public String expendedId;
     public String navigatorEventId;
+    public Integer bottomMargin;
     public List<FabActionParams> actions;
     public String screenInstanceId;
 
