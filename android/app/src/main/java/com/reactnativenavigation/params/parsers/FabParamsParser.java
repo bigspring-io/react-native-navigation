@@ -12,11 +12,12 @@ public class FabParamsParser extends Parser {
         FabParams fabParams = new FabParams();
         fabParams.collapsedId = params.getString("collapsedId");
         fabParams.expendedId = params.getString("expendedId");
-        fabParams.bottomMargin = params.getInt("bottomMargin");
         fabParams.navigatorEventId = navigatorEventId;
         fabParams.screenInstanceId = screenInstanceId;
         fabParams.backgroundColor = getColor(params, "backgroundColor", new StyleParams.Color());
-
+        if (params.containsKey("bottomMargin")) {
+            fabParams.bottomMargin = params.getInt("bottomMargin");
+        }
         if (hasKey(params, "collapsedIcon")) {
             fabParams.collapsedIcon = ImageLoader.loadImage(params.getString("collapsedIcon"));
         }
