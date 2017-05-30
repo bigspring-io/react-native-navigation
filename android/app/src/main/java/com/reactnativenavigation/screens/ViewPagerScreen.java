@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ViewGroup;
 
 import com.reactnativenavigation.params.BaseScreenParams;
 import com.reactnativenavigation.params.FabParams;
@@ -12,6 +13,7 @@ import com.reactnativenavigation.params.ScreenParams;
 import com.reactnativenavigation.views.ContentView;
 import com.reactnativenavigation.views.LeftButtonOnClickListener;
 import com.reactnativenavigation.views.TopTabs;
+import com.reactnativenavigation.utils.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,13 +94,20 @@ public class ViewPagerScreen extends Screen {
     }
 
     private void setTopTabIcons(TopTabs topTabs) {
+        boolean hasIcons = false;
         for (int i = 0; i < topTabs.getTabCount(); i++) {
             PageParams pageParams = screenParams.topTabParams.get(i);
             if (pageParams.tabIcon != null) {
                 topTabs.getTabAt(i).setIcon(pageParams.tabIcon);
+                hasIcons = true;
             }
         }
         topTabs.setTopTabsIconColor(screenParams.styleParams);
+        if (hasIcons) {
+            ViewGroup.LayoutParams lp = topTabs.getLayoutParams();
+            lp.height = (int) ViewUtils.convertDpToPixel(72);
+            topTabs.setLayoutParams(lp);
+        }
     }
 
     private void addContent(ContentView contentView) {
