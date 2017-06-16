@@ -265,7 +265,7 @@ public class NavigationActivity extends AppCompatActivity implements DefaultHard
     }
 
     //TODO all these setters should be combined to something like setStyle
-    void setTopBarVisible(String screenInstanceId, boolean hidden, boolean animated) {
+    public void setTopBarVisible(String screenInstanceId, boolean hidden, boolean animated) {
         layout.setTopBarVisible(screenInstanceId, hidden, animated);
         modalController.setTopBarVisible(screenInstanceId, hidden, animated);
     }
@@ -299,6 +299,9 @@ public class NavigationActivity extends AppCompatActivity implements DefaultHard
     void setScreenFab(String screenInstanceId, String navigatorEventId, FabParams fab) {
         layout.setFab(screenInstanceId, navigatorEventId, fab);
         modalController.setFab(screenInstanceId, navigatorEventId, fab);
+    }
+    public Layout getLayout() {
+        return layout;
     }
 
     public void setScreenStyle(String screenInstanceId, Bundle styleParams) {

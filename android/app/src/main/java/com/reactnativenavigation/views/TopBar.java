@@ -49,6 +49,10 @@ public class TopBar extends AppBarLayout {
         return new TitleBar(getContext());
     }
 
+    public TitleBar getTitleBar() {
+        return titleBar;
+    }
+
     protected void addTitleBar() {
         titleBarAndContextualMenuContainer.addView(titleBar, new ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT));
     }
