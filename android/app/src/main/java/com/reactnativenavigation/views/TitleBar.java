@@ -200,9 +200,7 @@ public class TitleBar extends Toolbar {
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        if (hasLeftButton()) {
-                            leftButton.setIsDisabled(true);
-                        }
+                        setVisibility(View.GONE);
                         if (onHidden != null) {
                             onHidden.run();
                         }
@@ -223,9 +221,7 @@ public class TitleBar extends Toolbar {
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationStart(Animator animation) {
-                        if (hasLeftButton()) {
-                            leftButton.setIsDisabled(false);
-                        }
+                        setVisibility(View.VISIBLE);
                     }
                     @Override
                     public void onAnimationEnd(Animator animation) {
