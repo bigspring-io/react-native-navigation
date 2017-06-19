@@ -200,6 +200,9 @@ public class TitleBar extends Toolbar {
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        if (hasLeftButton()) {
+                            leftButton.setIsDisabled(true);
+                        }
                         if (onHidden != null) {
                             onHidden.run();
                         }
@@ -218,6 +221,12 @@ public class TitleBar extends Toolbar {
                 .setDuration(200)
                 .setInterpolator(new AccelerateDecelerateInterpolator())
                 .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        if (hasLeftButton()) {
+                            leftButton.setIsDisabled(false);
+                        }
+                    }
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         if (onDisplayed != null) {

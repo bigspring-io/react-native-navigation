@@ -19,6 +19,7 @@ class LeftButton extends MaterialMenuDrawable implements View.OnClickListener {
     }
 
     private TitleBarLeftButtonParams params;
+    private boolean isDisabled;
     private final LeftButtonOnClickListener onClickListener;
     private final String navigatorEventId;
     private final boolean overrideBackPressInJs;
@@ -33,6 +34,7 @@ class LeftButton extends MaterialMenuDrawable implements View.OnClickListener {
         this.onClickListener = onClickListener;
         this.navigatorEventId = navigatorEventId;
         this.overrideBackPressInJs = overrideBackPressInJs;
+        this.isDisabled = false;
         setInitialState();
         setColor();
     }
@@ -48,14 +50,20 @@ class LeftButton extends MaterialMenuDrawable implements View.OnClickListener {
         setColor();
     }
 
+    public void setIsDisabled(boolean disabled) {
+        this.isDisabled = disabled;
+    }
+
     @Override
     public void onClick(View v) {
-        if (isBackButton()) {
-            handleBackButtonClick();
-        } else if (isSideMenuButton()) {
-            onClickListener.onSideMenuButtonClick();
-        } else {
-            sendClickEvent();
+        if (!isDisabled) {
+            if (isBackButton()) {
+                handleBackButtonClick();
+            } else if (isSideMenuButton()) {
+                onClickListener.onSideMenuButtonClick();
+            } else {
+                sendClickEvent();
+            }
         }
     }
 
