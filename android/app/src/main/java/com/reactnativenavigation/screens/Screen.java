@@ -49,7 +49,7 @@ public abstract class Screen extends RelativeLayout implements Subscriber {
     protected final ScreenParams screenParams;
     protected TopBar topBar;
     private final LeftButtonOnClickListener leftButtonOnClickListener;
-    private ScreenAnimator screenAnimator;
+    protected ScreenAnimator screenAnimator;
     protected StyleParams styleParams;
     public final SharedElements sharedElements;
 

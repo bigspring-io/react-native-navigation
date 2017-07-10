@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 
+import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.params.BaseScreenParams;
 import com.reactnativenavigation.params.FabParams;
 import com.reactnativenavigation.params.PageParams;
@@ -167,5 +168,23 @@ public class ViewPagerScreen extends Screen {
                 viewPager.setCurrentItem(i);
             }
         }
+    }
+    public void show() {
+        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", getNavigatorEventId());
+        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", getNavigatorEventId());
+        screenAnimator.show(screenParams.animateScreenTransitions);
+    }
+
+    public void show(boolean animated) {
+        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", getNavigatorEventId());
+        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", getNavigatorEventId());
+        screenAnimator.show(animated);
+    }
+
+    public void show(boolean animated, Runnable onAnimationEnd) {
+        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", getNavigatorEventId());
+        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", getNavigatorEventId());
+        setStyle();
+        screenAnimator.show(animated, onAnimationEnd);
     }
 }
