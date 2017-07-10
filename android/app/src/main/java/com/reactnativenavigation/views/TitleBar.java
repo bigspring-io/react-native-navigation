@@ -2,7 +2,9 @@ package com.reactnativenavigation.views;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.ActionMenuView;
@@ -12,7 +14,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.TextView;
-
+import com.reactnativenavigation.params.BaseScreenParams;
 import com.reactnativenavigation.params.BaseTitleBarButtonParams;
 import com.reactnativenavigation.params.StyleParams;
 import com.reactnativenavigation.params.TitleBarButtonParams;
@@ -29,11 +31,6 @@ public class TitleBar extends Toolbar {
 
     public TitleBar(Context context) {
         super(context);
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
     }
 
     @Override
@@ -75,13 +72,28 @@ public class TitleBar extends Toolbar {
     }
 
     public void setStyle(StyleParams params) {
-        setVisibility(params.titleBarHidden ? GONE : VISIBLE);
+        setVisibility(params.titleBarHidden);
         setTitleTextColor(params);
         setTitleTextFont(params);
         setSubtitleTextColor(params);
         colorOverflowButton(params);
         setBackground(params);
         centerTitle(params);
+    }
+
+    public void setVisibility(boolean titleBarHidden) {
+        setVisibility(titleBarHidden ? GONE : VISIBLE);
+    }
+
+    private Activity getActivity() {
+        Context context = getContext();
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                return (Activity)context;
+            }
+            context = ((ContextWrapper)context).getBaseContext();
+        }
+        return null;
     }
 
     private void centerTitle(final StyleParams params) {
@@ -93,7 +105,7 @@ public class TitleBar extends Toolbar {
             @Override
             public void run() {
                 if (params.titleBarTitleTextCentered) {
-                    titleView.setX(ViewUtils.getScreenWidth() / 2 - titleView.getWidth() / 2);
+                    titleView.setX(ViewUtils.getWindowWidth(getActivity()) / 2 - titleView.getWidth() / 2);
                 }
                 
             }
@@ -307,5 +319,11 @@ public class TitleBar extends Toolbar {
 
     BaseTitleBarButtonParams getButton(int index) {
         return rightButtons.get(rightButtons.size() - index - 1);
+    }
+
+    public void onViewPagerScreenChanged(BaseScreenParams screenParams) {
+        if (hasLeftButton()) {
+            leftButton.updateNavigatorEventId(screenParams.getNavigatorEventId());
+        }
     }
 }
