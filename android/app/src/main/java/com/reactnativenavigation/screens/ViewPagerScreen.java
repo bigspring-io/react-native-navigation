@@ -169,21 +169,45 @@ public class ViewPagerScreen extends Screen {
             }
         }
     }
+
+    public void willDisappear() {
+        for (int i = 0; i < screenParams.topTabParams.size(); i++) {
+            String navigatorEventId = screenParams.topTabParams.get(i).navigationParams.navigatorEventId;
+            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willDisappear", navigatorEventId);
+        }
+    }
+
+    public void didDisappear() {
+        for (int i = 0; i < screenParams.topTabParams.size(); i++) {
+            String navigatorEventId = screenParams.topTabParams.get(i).navigationParams.navigatorEventId;
+            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didDisappear", navigatorEventId);
+        }
+    }
+
     public void show() {
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", getNavigatorEventId());
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", getNavigatorEventId());
+        for (int i = 0; i < screenParams.topTabParams.size(); i++) {
+            String navigatorEventId = screenParams.topTabParams.get(i).navigationParams.navigatorEventId;
+            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", navigatorEventId);
+            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", navigatorEventId);
+        }
         screenAnimator.show(screenParams.animateScreenTransitions);
     }
 
     public void show(boolean animated) {
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", getNavigatorEventId());
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", getNavigatorEventId());
+        for (int i = 0; i < screenParams.topTabParams.size(); i++) {
+            String navigatorEventId = screenParams.topTabParams.get(i).navigationParams.navigatorEventId;
+            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", navigatorEventId);
+            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", navigatorEventId);
+        }
         screenAnimator.show(animated);
     }
 
     public void show(boolean animated, Runnable onAnimationEnd) {
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", getNavigatorEventId());
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", getNavigatorEventId());
+        for (int i = 0; i < screenParams.topTabParams.size(); i++) {
+            String navigatorEventId = screenParams.topTabParams.get(i).navigationParams.navigatorEventId;
+            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", navigatorEventId);
+            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", navigatorEventId);
+        }
         setStyle();
         screenAnimator.show(animated, onAnimationEnd);
     }
