@@ -98,8 +98,8 @@ public class ScreenStack {
             @Override
             public void onDisplay() {
                 if (isStackVisible) {
-                    NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", stack.peek().getNavigatorEventId());
-                    NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", stack.peek().getNavigatorEventId());
+                    stack.peek().willAppear();
+                    stack.peek().didAppear();
                 }
             }
         });
@@ -236,8 +236,8 @@ public class ScreenStack {
 
     private void readdPrevious(Screen previous) {
         previous.setVisibility(View.VISIBLE);
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", previous.getNavigatorEventId());
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", previous.getNavigatorEventId());
+        previous.willAppear();
+        previous.didAppear();
         parent.addView(previous, 0);
     }
 
@@ -425,13 +425,13 @@ public class ScreenStack {
         isStackVisible = true;
         stack.peek().setStyle();
         stack.peek().setVisibility(View.VISIBLE);
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", stack.peek().getNavigatorEventId());
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", stack.peek().getNavigatorEventId());
+        stack.peek().willAppear();
+        stack.peek().didAppear();
     }
 
     public void hide() {
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willDisappear", stack.peek().getNavigatorEventId());
-        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didDisappear", stack.peek().getNavigatorEventId());
+        stack.peek().willDisappear();
+        stack.peek().didDisappear();
         isStackVisible = false;
         stack.peek().setVisibility(View.INVISIBLE);
     }

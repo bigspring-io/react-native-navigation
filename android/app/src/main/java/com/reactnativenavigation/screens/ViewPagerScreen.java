@@ -184,30 +184,34 @@ public class ViewPagerScreen extends Screen {
         }
     }
 
-    public void show() {
+    public void willAppear() {
         for (int i = 0; i < screenParams.topTabParams.size(); i++) {
             String navigatorEventId = screenParams.topTabParams.get(i).navigationParams.navigatorEventId;
             NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", navigatorEventId);
+        }
+    }
+    public void didAppear() {
+        for (int i = 0; i < screenParams.topTabParams.size(); i++) {
+            String navigatorEventId = screenParams.topTabParams.get(i).navigationParams.navigatorEventId;
             NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", navigatorEventId);
         }
+    }
+
+    public void show() {
+        willAppear();
+        didAppear();
         screenAnimator.show(screenParams.animateScreenTransitions);
     }
 
     public void show(boolean animated) {
-        for (int i = 0; i < screenParams.topTabParams.size(); i++) {
-            String navigatorEventId = screenParams.topTabParams.get(i).navigationParams.navigatorEventId;
-            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", navigatorEventId);
-            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", navigatorEventId);
-        }
+        willAppear();
+        didAppear();
         screenAnimator.show(animated);
     }
 
     public void show(boolean animated, Runnable onAnimationEnd) {
-        for (int i = 0; i < screenParams.topTabParams.size(); i++) {
-            String navigatorEventId = screenParams.topTabParams.get(i).navigationParams.navigatorEventId;
-            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", navigatorEventId);
-            NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", navigatorEventId);
-        }
+        willAppear();
+        didAppear();
         setStyle();
         screenAnimator.show(animated, onAnimationEnd);
     }

@@ -286,6 +286,14 @@ public abstract class Screen extends RelativeLayout implements Subscriber {
         NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didDisappear", getNavigatorEventId());
     }
 
+    public void willAppear() {
+        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("willAppear", getNavigatorEventId());
+    }
+
+    public void didAppear() {
+        NavigationApplication.instance.getEventEmitter().sendScreenChangedEvent("didAppear", getNavigatorEventId());
+    }
+
     public void hide(Map<String, SharedElementTransition> sharedElements, Runnable onAnimationEnd) {
         removeHiddenSharedElements();
         if (hasVisibleSharedElements()) {
