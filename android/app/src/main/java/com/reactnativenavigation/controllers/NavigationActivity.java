@@ -399,11 +399,23 @@ public class NavigationActivity extends AppCompatActivity implements DefaultHard
     }
 
     public void showSnackbar(SnackbarParams params) {
-        layout.showSnackbar(params);
+        Layout currentLayout;
+        if (modalController.getStackSize() > 0) {
+            currentLayout = modalController.getTopModal().getLayout();
+        } else {
+            currentLayout = layout;
+        }
+        currentLayout.showSnackbar(params);
     }
 
     public void dismissSnackbar() {
-        layout.dismissSnackbar();
+        Layout currentLayout;
+        if (modalController.getStackSize() > 0) {
+            currentLayout = modalController.getTopModal().getLayout();
+        } else {
+            currentLayout = layout;
+        }
+        currentLayout.dismissSnackbar();
     }
 
     public void showContextualMenu(String screenInstanceId, ContextualMenuParams params, Callback onButtonClicked) {
