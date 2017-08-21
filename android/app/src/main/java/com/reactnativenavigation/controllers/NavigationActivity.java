@@ -316,7 +316,11 @@ public class NavigationActivity extends AppCompatActivity implements DefaultHard
         modalController.setFab(screenInstanceId, navigatorEventId, fab);
     }
     public Layout getLayout() {
-        return layout;
+        if (modalController.getStackSize() > 0) {
+            return modalController.getTopModal().getLayout();
+        } else {
+            return layout;
+        }
     }
 
     public void setScreenStyle(String screenInstanceId, Bundle styleParams) {
