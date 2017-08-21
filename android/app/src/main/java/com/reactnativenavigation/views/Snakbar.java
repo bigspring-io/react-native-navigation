@@ -4,6 +4,7 @@ import android.support.design.widget.Snackbar;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
+import android.widget.TextView;
 
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.params.SnackbarParams;
@@ -72,6 +73,11 @@ class Snakbar {
         if (params.backgroundColor.hasColor()) {
             snackbar.getView().setBackgroundColor(params.backgroundColor.getColor());
         }
+        TextView snackbarText = (TextView) snackbar
+            .getView()
+            .findViewById(android.support.design.R.id.snackbar_text);
+        snackbarText.setMaxLines(Integer.MAX_VALUE);
+        snackbarText.setEllipsize(null);
     }
 
     private void setOnDismissListener() {
