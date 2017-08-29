@@ -91,7 +91,7 @@ public class SingleScreenLayout extends BaseLayout {
     }
 
     private void sendScreenChangedEventAfterInitialPush() {
-        if (screenParams.topTabParams != null) {
+        if (screenParams.hasTopTabs()) {
             EventBus.instance.post(new ScreenChangedEvent(screenParams.topTabParams.get(0)));
         } else {
             EventBus.instance.post(new ScreenChangedEvent(screenParams));
