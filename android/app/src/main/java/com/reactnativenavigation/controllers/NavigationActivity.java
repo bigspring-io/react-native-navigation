@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -204,6 +205,10 @@ public class NavigationActivity extends AppCompatActivity implements DefaultHard
     }
 
     void push(ScreenParams params) {
+        if (params.mutateBaseScreenStack) {
+            // modalController.destroyAllModals();
+            dismissAllModals();
+        }
         if (modalController.containsNavigator(params.getNavigatorId())) {
             modalController.push(params);
         } else {

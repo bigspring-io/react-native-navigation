@@ -56,7 +56,6 @@ class ModalController implements ScreenStackContainer {
             stack.pop().dismiss();
         }
     }
-
     void dismissAllModals() {
         for (Modal modal : stack) {
             modal.dismiss();

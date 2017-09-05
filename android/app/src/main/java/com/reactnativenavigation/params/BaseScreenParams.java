@@ -16,6 +16,7 @@ public class BaseScreenParams {
     public FabParams fabParams;
 
     public boolean overrideBackPressInJs;
+    public boolean mutateBaseScreenStack;
     public StyleParams styleParams;
     public String fragmentCreatorClassName;
     public Bundle fragmentCreatorPassProps;
