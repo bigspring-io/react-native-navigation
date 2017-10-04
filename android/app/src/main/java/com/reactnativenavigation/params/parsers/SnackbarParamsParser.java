@@ -27,6 +27,8 @@ public class SnackbarParamsParser extends Parser {
                 return Snackbar.LENGTH_SHORT;
             case "long":
                 return Snackbar.LENGTH_LONG;
+            case "extra-long":
+                return 5000;
             case "indefinite":
                 return Snackbar.LENGTH_INDEFINITE;
             default:
